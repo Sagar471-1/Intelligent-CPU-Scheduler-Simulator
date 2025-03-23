@@ -1,4 +1,18 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+import matplotlib.pyplot as plt
 import numpy as np
+
+def calculate_scheduling(algorithm, processes, time_quantum=2):
+    if algorithm == "FCFS":
+        return fcfs(processes)
+    elif algorithm == "SJF":
+        return sjf(processes)
+    elif algorithm == "Round Robin":
+        return round_robin(processes, time_quantum)
+    elif algorithm == "Priority Scheduling":
+        return priority_scheduling(processes)
+
 
 #fcfs scheduling
 def fcfs(processes):
