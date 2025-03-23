@@ -1,0 +1,22 @@
+from Algorithms import calculate_scheduling
+from visualization import visualize
+from GUI import create_gui
+from tkinter import messagebox
+
+def run_simulation(algorithm_var, time_quantum_entry, process_table):
+    algorithm = algorithm_var.get()
+    time_quantum = int(time_quantum_entry.get()) if algorithm == "Round Robin" else 2
+    processes = []
+    for row in process_table.get_children():
+        values = process_table.item(row)['values']
+        processes.append((values[0], values[1], values[2], values[3]))
+
+    if not processes:
+        messagebox.showerror("Error", "No processes added.")
+        return
+
+    schedule = calculate_scheduling(algorithm, processes, time_quantum)
+    visualize(schedule)
+
+if __name__ == "__main__":
+    create_gui(run_simulation)
