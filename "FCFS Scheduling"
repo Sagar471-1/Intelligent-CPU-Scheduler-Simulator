@@ -1,0 +1,17 @@
+import numpy as np
+
+#fcfs scheduling
+def fcfs(processes):
+    processes.sort(key=lambda x: x[1])  # Sort by Arrival Time
+    completion_time, waiting_time, turnaround_time = 0, 0, 0
+    schedule = []
+    
+    for process in processes:
+        pid, arrival, burst, priority = process
+        start_time = max(completion_time, arrival)
+        completion_time = start_time + burst
+        waiting_time = start_time - arrival
+        turnaround_time = completion_time - arrival
+        schedule.append((pid, start_time, completion_time, waiting_time, turnaround_time))
+    
+    return schedule
